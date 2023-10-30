@@ -1,8 +1,16 @@
-import { readFile } from 'fs/promises';
+import { readFile, readdir } from 'fs/promises';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
-export async function getReview(slug: String) {
+export interface Review {
+	slug: string;
+	title: string;
+	date: string;
+	image: string;
+	body: string;
+}
+
+export async function getReview(slug: string): Promise<Review> {
 	const text = await readFile(`./content/reviews/${slug}.md`, 'utf8'); // second param is character encoding
 	const {
 		content,
@@ -10,5 +18,18 @@ export async function getReview(slug: String) {
 	} = matter(text);
 	const body = marked(content);
 
-	return { title, date, image, body };
+	return { slug, title, date, image, body };
+}
+
+export async function getReviews(): Promise<Review[]> {
+	const reviews: Review[] = [];
+	const files = await readdir('./content/reviews');
+	const slugs = files.filter(file => file.endsWith('.md')).map(file => file.slice(0, -'.md'.length));
+
+	for (const slug of slugs) {
+		const review: Review = await getReview(slug);
+		reviews.push(review);
+	}
+
+	return reviews;
 }
