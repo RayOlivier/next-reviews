@@ -1,10 +1,15 @@
-import Heading from "@/components/Heading";
+import Heading from '@/components/Heading';
+import { Metadata } from 'next';
 
-export default function AboutPage(){
-    return (
-        <>
-        <Heading>About</Heading>
-        <p>about the site</p>
-        </>
-    )
+export const metadata: Metadata = {
+  title: 'About',
+};
+
+export default function AboutPage() {
+  return (
+    <>
+      <Heading>About</Heading>
+      <p>about the site</p>
+    </>
+  );
 }

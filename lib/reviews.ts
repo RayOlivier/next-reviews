@@ -37,5 +37,12 @@ export async function getReviews(): Promise<Review[]> {
     reviews.push(review);
   }
 
+  reviews.sort((a, b) => b.date.localeCompare(a.date));
+
   return reviews;
+}
+
+export async function getFeaturedReview(): Promise<Review> {
+  const reviews = await getReviews();
+  return reviews[0];
 }

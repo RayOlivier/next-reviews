@@ -1,10 +1,20 @@
 import Heading from '@/components/Heading';
 import { getReview, getSlugs } from '@/lib/reviews';
+import { Metadata } from 'next';
 
 // gets the existing slugs from the content files so they are statically rendered pages generated at build time despite dynamic route
 export async function generateStaticParams() {
   const slugs = await getSlugs();
   return slugs.map((slug) => ({ slug })); // must be array of objects with slug property
+}
+
+export async function generateMetadata({
+  params: { slug }
+}: ReviewPageProps): Promise<Metadata> {
+  const review = await getReview(slug);
+  return {
+    title: review.title
+  };
 }
 
 interface ReviewPageProps {
