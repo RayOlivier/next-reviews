@@ -8,6 +8,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@heroicons/react": "^2.0.18",
 		"gray-matter": "^4.0.3",
 		"marked": "^9.1.2",
 		"next": "^13.5.6",
