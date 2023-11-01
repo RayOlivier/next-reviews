@@ -41,10 +41,12 @@ export default async function ReviewPage({
         height={360}
         className="font-semibold font-orbitron  mb-2 rounded"
       />
-      <article
-        dangerouslySetInnerHTML={{ __html: review.body }}
-        className="max-w-screen-sm prose prose-slate"
-      />
+      {review.body && (
+        <article
+          dangerouslySetInnerHTML={{ __html: review.body }}
+          className="max-w-screen-sm prose prose-slate"
+        />
+      )}
     </>
   );
 }

@@ -23,7 +23,7 @@ export default async function ReviewsPage() {
               <Link href={`/reviews/${review.slug}`}>
                 {' '}
                 <img
-                  src={`/images/${review.slug}.jpg`}
+                  src={review.image}
                   alt=""
                   width={640}
                   height={360}
