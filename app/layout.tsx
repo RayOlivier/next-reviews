@@ -17,13 +17,13 @@ interface LayoutProps {
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={`${orbitron.variable} ${exo2.variable}`}>
-      <body className="bg-orange-50 flex flex-col px-4 py-2 min-h-screen">
+      <body className="bg-orange-50 flex flex-col min-h-screen">
         <header>
           <NavBar />
         </header>
 
-        <main className="grow py-3">{children}</main>
-        <footer className="border-t py-3 text-center text-xs text-slate-500">
+        <main className="grow py-3 px-4">{children}</main>
+        <footer className="border-t py-3 text-center text-xs text-slate-500 bg-orange-100">
           Game data and images courtesy of{' '}
           <a
             href="https://rawg.io/"
@@ -32,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps) {
           >
             RAWG
           </a>
+          . Made by Ray Olivier.
         </footer>
       </body>
     </html>
