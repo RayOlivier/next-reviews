@@ -5,14 +5,14 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+// Opt out of caching for all data requests in the route segment, will re-render on every refresh. Not ideal, quick and dirty.
+// export const dynamic = 'force-dynamic';
+
 /**
  * dynamicParams defaults to true, will generate a page for a slug on demand as needed. (if false, it will return a 404 if the slug isn't defined and statically built at build time via generateStaticParams)
  *
  */
 // export const dynamicParams = true;
-
-// Opt out of caching for all data requests in the route segment, will re-render on every refresh. Not ideal, quick and dirty.
-// export const dynamic = 'force-dynamic';
 
 // gets the existing slugs from the content files so they are statically rendered pages generated at build time despite dynamic route
 export async function generateStaticParams() {

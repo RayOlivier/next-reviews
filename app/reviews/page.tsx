@@ -4,6 +4,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// export const revalidate = 300; // seconds, will re-render the page after interval - FIRST request will not show changes, it will generate changes in the BACKGROUND. Second refresh will show changes.
+
 export const metadata: Metadata = {
   title: 'Reviews'
 };

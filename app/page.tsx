@@ -4,6 +4,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// export const revalidate = 60; // seconds, will re-render the page after interval dependent on client requests, regardless of backend changes or not
+
 export default async function HomePage() {
   const reviews = await getReviews(3);
   return (
