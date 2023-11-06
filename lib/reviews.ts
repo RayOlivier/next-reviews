@@ -20,7 +20,12 @@ async function fetchReviews(parameters: any) {
   const url =
     `${CMS_URL}/api/reviews?` +
     qs.stringify(parameters, { encodeValuesOnly: true });
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    next: {
+      // often convenient to set revalidation on fetch requests, will affect all pages that use it. this is background validation.
+      revalidate: 30 // seconds
+    }
+  });
 
   if (!response.ok) {
     throw new Error(`CMS returned ${response.status} for ${url}`);
