@@ -2,6 +2,7 @@ import Heading from '@/components/Heading';
 import ShareLinkButton from '@/components/ShareLinkButton';
 import { getReview, getSlugs } from '@/lib/reviews';
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 // gets the existing slugs from the content files so they are statically rendered pages generated at build time despite dynamic route
 export async function generateStaticParams() {
@@ -30,13 +31,15 @@ export default async function ReviewPage({
   return (
     <>
       <Heading>{review.title}</Heading>
+      <p className="font-semibold pb-3"> {review.subtitle} </p>
       <div className="flex gap-3 items-baseline">
         <p className="italic pb-2 ">{review.date}</p>
         <ShareLinkButton></ShareLinkButton>
       </div>
-      <img
+      <Image
         src={review.image}
         alt=""
+        priority
         width={640}
         height={360}
         className="font-semibold font-orbitron  mb-2 rounded"

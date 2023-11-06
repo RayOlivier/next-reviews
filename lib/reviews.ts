@@ -10,6 +10,7 @@ interface CmsItem {
 export interface Review {
   slug: string;
   title: string;
+  subtitle: string;
   date: string;
   image: string;
   body?: string;
@@ -46,6 +47,7 @@ function toReview(item: CmsItem): Review {
   return {
     slug: attributes.slug,
     title: attributes.title,
+    subtitle: attributes.subtitle,
     date: attributes?.publishedAt.slice(0, 'yyyy-mm-dd'.length),
     image: CMS_URL + attributes.image?.data.attributes.url
   };
@@ -68,23 +70,23 @@ export async function getReview(slug: string): Promise<Review> {
   };
 }
 
-export async function getReviews(): Promise<Review[]> {
+export async function getReviews(pageSize: number): Promise<Review[]> {
   const { data } = await fetchReviews({
     fields: ['slug', 'title', 'subtitle', 'publishedAt'],
     populate: {
-      image: { fields: ['url'] },
-      sort: ['publishedAt:desc'],
-      pagination: { pageSize: 6 }
-    }
+      image: { fields: ['url'] }
+    },
+    sort: ['publishedAt:desc'],
+    pagination: { pageSize: pageSize }
   });
 
   return data?.map(toReview);
 }
 
-export async function getFeaturedReview(): Promise<Review> {
-  const reviews = await getReviews();
-  return reviews[0];
-}
+// export async function getFeaturedReview(): Promise<Review> {
+//   const reviews = await getReviews();
+//   return reviews[0];
+// }
 
 /*
   Old versions for data from md files
