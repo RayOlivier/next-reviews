@@ -3,6 +3,16 @@ import ShareLinkButton from '@/components/ShareLinkButton';
 import { getReview, getSlugs } from '@/lib/reviews';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+/**
+ * dynamicParams defaults to true, will generate a page for a slug on demand as needed. (if false, it will return a 404 if the slug isn't defined and statically built at build time via generateStaticParams)
+ *
+ */
+// export const dynamicParams = true;
+
+// Opt out of caching for all data requests in the route segment, will re-render on every refresh. Not ideal, quick and dirty.
+// export const dynamic = 'force-dynamic';
 
 // gets the existing slugs from the content files so they are statically rendered pages generated at build time despite dynamic route
 export async function generateStaticParams() {
@@ -14,6 +24,9 @@ export async function generateMetadata({
   params: { slug }
 }: ReviewPageProps): Promise<Metadata> {
   const review = await getReview(slug);
+  if (!review) {
+    notFound();
+  }
   return {
     title: review.title
   };
@@ -27,6 +40,10 @@ export default async function ReviewPage({
   params: { slug }
 }: ReviewPageProps) {
   const review = await getReview(slug);
+
+  if (!review) {
+    notFound();
+  }
 
   return (
     <>

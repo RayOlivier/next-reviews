@@ -53,7 +53,7 @@ function toReview(item: CmsItem): Review {
   };
 }
 
-export async function getReview(slug: string): Promise<Review> {
+export async function getReview(slug: string): Promise<Review | null> {
   const { data } = await fetchReviews({
     filters: { slug: { $eq: slug } },
     fields: ['slug', 'title', 'subtitle', 'publishedAt', 'body'],
@@ -62,6 +62,9 @@ export async function getReview(slug: string): Promise<Review> {
       pagination: { pageSize: 1, withCount: false }
     }
   });
+  if (data.length === 0) {
+    return null;
+  }
   const item = data[0];
 
   return {
