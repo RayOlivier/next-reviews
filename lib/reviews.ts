@@ -1,6 +1,8 @@
 import { marked } from 'marked';
 import qs from 'qs';
 
+export const CACHE_TAG_REVIEWS = 'reviews'; // note, matches our strapi model for reviews
+
 const CMS_URL = 'http://localhost:1337';
 
 interface CmsItem {
@@ -23,7 +25,9 @@ async function fetchReviews(parameters: any) {
   const response = await fetch(url, {
     next: {
       // often convenient to set revalidation on fetch requests, will affect all pages that use it. this is background validation.
-      revalidate: 30 // seconds
+      // revalidate: 30 // seconds
+
+      tags: [CACHE_TAG_REVIEWS]
     }
   });
 
