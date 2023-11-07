@@ -18,6 +18,11 @@ export interface Review {
   body?: string;
 }
 
+export interface PaginatedReviews {
+  pageCount: number;
+  reviews: Review[];
+}
+
 async function fetchReviews(parameters: any) {
   const url =
     `${CMS_URL}/api/reviews?` +
@@ -82,17 +87,23 @@ export async function getReview(slug: string): Promise<Review | null> {
   };
 }
 
-export async function getReviews(pageSize: number): Promise<Review[]> {
-  const { data } = await fetchReviews({
+export async function getReviews(
+  pageSize: number,
+  page?: number
+): Promise<PaginatedReviews> {
+  const { data, meta } = await fetchReviews({
     fields: ['slug', 'title', 'subtitle', 'publishedAt'],
     populate: {
       image: { fields: ['url'] }
     },
     sort: ['publishedAt:desc'],
-    pagination: { pageSize: pageSize }
+    pagination: { pageSize, page }
   });
 
-  return data?.map(toReview);
+  return {
+    reviews: data?.map(toReview),
+    pageCount: meta.pagination.pageCount
+  };
 }
 
 // export async function getFeaturedReview(): Promise<Review> {
