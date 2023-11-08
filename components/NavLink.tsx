@@ -18,7 +18,7 @@ export default function NavLink({
   const pathname = usePathname();
   /* using Link uses client side navigation, no longer fetches new html from server after first load. acts more like a SPA. **in prod, Next prefetches all Links by default (fetches data, not html)
    */
-  console.log(pathname);
+
   if (pathname === href) {
     return (
       <span className="px-1 py-2 text-orange-800 select-none  border-b-2 border-b-orange-800">

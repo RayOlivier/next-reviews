@@ -14,7 +14,7 @@ export default function PaginationBar({
   href
 }: PaginationBarProps) {
   return (
-    <div className="flex gap-3 items-center pb-3">
+    <div className="flex gap-3 items-center">
       <PaginationLink
         href={`${href}?page=${pageNumber - 1}`}
         enabled={pageNumber > 1}

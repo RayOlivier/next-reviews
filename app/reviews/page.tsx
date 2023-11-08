@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import PaginationBar from '@/components/PaginationBar';
+import SearchBox from '@/components/SearchBox';
 
 // export const revalidate = 300; // seconds, will re-render the page after interval - FIRST request will not show changes, it will generate changes in the BACKGROUND. Second refresh will show changes.
 
@@ -25,11 +26,14 @@ export default async function ReviewsPage(props: ReviewsPageProps) {
   return (
     <>
       <Heading>Reviews</Heading>
-      <PaginationBar
-        pageCount={pageCount}
-        pageNumber={page}
-        href="/reviews"
-      ></PaginationBar>
+      <div className="pb-3 flex justify-between">
+        <PaginationBar
+          pageCount={pageCount}
+          pageNumber={page}
+          href="/reviews"
+        ></PaginationBar>
+        <SearchBox />
+      </div>
       <ul className="flex flex-row flex-wrap gap-3">
         {reviews.map((review, index) => {
           return (
