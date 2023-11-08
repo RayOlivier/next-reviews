@@ -18,7 +18,7 @@ interface ReviewsPageProps {
 }
 
 export default async function ReviewsPage(props: ReviewsPageProps) {
-  console.log('ReviewsPage props', props);
+  // using searchParams forces the page to be dynamic. could use generateStaticParams to build the pages statically, but opt not to here in the scenario that we add additional search filters that would effect what's shown on each page
   const page = parsePageParam(props.searchParams.page || null);
   const { reviews, pageCount } = await getReviews(PAGE_SIZE, page);
 

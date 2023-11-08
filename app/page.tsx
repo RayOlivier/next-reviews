@@ -7,7 +7,7 @@ import Image from 'next/image';
 // export const revalidate = 60; // seconds, will re-render the page after interval dependent on client requests, regardless of backend changes or not
 
 export default async function HomePage() {
-  const reviews = await getReviews(3);
+  const { reviews } = await getReviews(3);
   return (
     <>
       <Heading>Indie Gamer</Heading>
