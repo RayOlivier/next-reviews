@@ -1,32 +1,20 @@
 import Link from 'next/link';
+import NavLink from './NavLink';
 
 export default function NavBar() {
   return (
     <nav className="bg-orange-200 px-2 py-2">
       <ul className="flex gap-2">
-        <li>
-          {/* using Link uses client side navigation, no longer fetches new html from server after first load. acts more like a SPA. **in prod, Next prefetches all Links by default (fetches data, not html)
-           */}
-          <Link
-            href="/"
-            className="font-bold font-orbitron text-orange-800 hover:underline"
-          >
-            Indie Gamer
-          </Link>
+        <li className="font-bold font-orbitron ">
+          <NavLink href="/">Indie Gamer</NavLink>
         </li>
         <li className="ml-auto">
-          <Link href="/reviews" className="text-orange-800 hover:underline">
-            Reviews
-          </Link>
+          <NavLink href="/reviews">Reviews</NavLink>
         </li>
         <li>
-          <Link
-            href="/about"
-            prefetch={false}
-            className="text-orange-800 hover:underline"
-          >
+          <NavLink href="/about" prefetch={false}>
             About
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>
