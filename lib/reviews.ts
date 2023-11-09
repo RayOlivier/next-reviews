@@ -23,6 +23,8 @@ export interface PaginatedReviews {
   reviews: Review[];
 }
 
+export type SearchableReview = Pick<Review, 'slug' | 'title'>;
+
 async function fetchReviews(parameters: any) {
   const url =
     `${CMS_URL}/api/reviews?` +
