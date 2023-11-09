@@ -57,6 +57,26 @@ export async function getSlugs(): Promise<string[]> {
   return data.map((item: CmsItem) => item.attributes.slug);
 }
 
+export async function searchReviews(
+  query: string
+): Promise<SearchableReview[]> {
+  //  strapi filters: https://docs.strapi.io/dev-docs/api/rest/filters-locale-publication#filtering
+  const { data } = await fetchReviews({
+    filters: { title: { $containsi: query } },
+    fields: ['slug', 'title'],
+    populate: {
+      image: { fields: ['url'] },
+      sort: ['title'],
+      pagination: { pageSize: 5 }
+    }
+  });
+
+  return data.map((item: CmsItem) => ({
+    slug: item.attributes.slug,
+    title: item.attributes.title
+  }));
+}
+
 function toReview(item: CmsItem): Review {
   const { attributes } = item;
 
@@ -107,6 +127,22 @@ export async function getReviews(
     pageCount: meta.pagination.pageCount
   };
 }
+
+// export async function getSearchableReviews(): Promise<SearchableReview[]> {
+//   const { data } = await fetchReviews({
+//     fields: ['slug', 'title'],
+//     populate: {
+//       image: { fields: ['url'] },
+//       sort: ['publishedAt:desc'],
+//       pagination: { pageSize: 100 }
+//     }
+//   });
+
+//   return data.map((item: CmsItem) => ({
+//     slug: item.attributes.slug,
+//     title: item.attributes.title
+//   }));
+// }
 
 // export async function getFeaturedReview(): Promise<Review> {
 //   const reviews = await getReviews();
