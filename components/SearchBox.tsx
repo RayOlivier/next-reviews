@@ -5,19 +5,21 @@ import { SearchableReview } from '@/lib/reviews';
 import { Combobox } from '@headlessui/react';
 import { useRouter } from 'next/navigation'; // other import from router uses old pages routing
 import { useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 export default function SearchBox() {
   const router = useRouter();
   const isClient = useIsClient();
   const [query, setQuery] = useState('');
+  const [debouncedQuery] = useDebounce(query, 300);
   const [reviews, setReviews] = useState<SearchableReview[]>([]);
 
   useEffect(() => {
-    if (query.length > 1) {
+    if (debouncedQuery.length > 1) {
       const controller = new AbortController();
       (async () => {
         // anonymous async function that we invoke immediately
-        const url = '/api/search?query=' + encodeURIComponent(query);
+        const url = '/api/search?query=' + encodeURIComponent(debouncedQuery);
         const response = await fetch(url, { signal: controller.signal });
         const reviews = await response.json();
 
@@ -28,7 +30,7 @@ export default function SearchBox() {
     } else {
       setReviews([]);
     }
-  }, [query]);
+  }, [debouncedQuery]);
 
   if (!isClient) {
     // prevent sever side rendering to prevent issue with headlessui providing the input with an id that doesn't match what the server assigns
@@ -36,7 +38,6 @@ export default function SearchBox() {
   }
 
   const handleChange = (review: SearchableReview) => {
-    console.log(review);
     router.push(`/reviews/${review.slug}`);
   };
 
