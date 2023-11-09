@@ -1,3 +1,5 @@
+import 'server-only'; // prevents these functions (and therefore fetching data directly from the cms in this case) from being used in client components
+
 import { marked } from 'marked';
 import qs from 'qs';
 
@@ -58,7 +60,7 @@ export async function getSlugs(): Promise<string[]> {
 }
 
 export async function searchReviews(
-  query: string
+  query: string | null
 ): Promise<SearchableReview[]> {
   //  strapi filters: https://docs.strapi.io/dev-docs/api/rest/filters-locale-publication#filtering
   const { data } = await fetchReviews({

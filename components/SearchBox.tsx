@@ -1,15 +1,10 @@
 'use client';
 
 import { useIsClient } from '@/lib/hooks';
-import { SearchableReview, searchReviews } from '@/lib/reviews';
+import { SearchableReview } from '@/lib/reviews';
 import { Combobox } from '@headlessui/react';
 import { useRouter } from 'next/navigation'; // other import from router uses old pages routing
 import { useEffect, useState } from 'react';
-
-// interface SearchBoxProps {
-//   reviews: SearchableReview[]; // can't fetch this from client component, so pass it from server component. this increases the size of the page.
-// }
-// { reviews }: SearchBoxProps
 
 export default function SearchBox() {
   const router = useRouter();
@@ -20,7 +15,11 @@ export default function SearchBox() {
   useEffect(() => {
     if (query.length > 1) {
       (async () => {
-        const reviews = await searchReviews(query);
+        const response = await fetch(
+          '/api/search?query=' + encodeURIComponent(query)
+        );
+        const reviews = await response.json();
+
         setReviews(reviews);
       })();
     } else {
