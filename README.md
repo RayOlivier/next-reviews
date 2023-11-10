@@ -2,7 +2,7 @@
 
 A video game review site built as a portfolio piece.
 <br/>
- [Live Site](https://next-reviews-itefpdh59-rayoliviers-projects.vercel.app/)
+ [Live Site](https://next-reviews-eta.vercel.app/)
 
 ## Description
 
