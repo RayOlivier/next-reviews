@@ -5,7 +5,7 @@ import qs from 'qs';
 
 export const CACHE_TAG_REVIEWS = 'reviews'; // note, matches our strapi model for reviews
 
-const CMS_URL = 'http://localhost:1337';
+const CMS_URL = process.env.CMS_URL;
 
 interface CmsItem {
   id: number;
@@ -87,7 +87,7 @@ function toReview(item: CmsItem): Review {
     title: attributes.title,
     subtitle: attributes.subtitle,
     date: attributes?.publishedAt.slice(0, 'yyyy-mm-dd'.length),
-    image: CMS_URL + attributes.image?.data.attributes.url
+    image: new URL(attributes.image?.data.attributes.url, CMS_URL).href
   };
 }
 
