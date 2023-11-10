@@ -53,8 +53,8 @@ function PaginationLink({ children, enabled, href }: PaginationLinkProps) {
   return (
     <Link
       href={href}
-      className="border border-orange-300 rounded bg-orange-100 text-slate-700 text-sm
-                   hover:bg-orange-200 hover:text-slate-900"
+      className="border border-purple-300 rounded bg-purple-100 text-slate-700 text-sm
+                   hover:bg-purple-200 hover:text-slate-900"
     >
       {children}
     </Link>

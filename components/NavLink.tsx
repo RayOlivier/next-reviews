@@ -21,14 +21,14 @@ export default function NavLink({
 
   if (pathname === href) {
     return (
-      <span className="px-1 py-2 text-orange-800 select-none  border-b-2 border-b-orange-800">
+      <span className="px-1 py-2 text-purple-800 select-none  border-b-2 border-b-purple-800">
         {children}
       </span>
     );
   }
   return (
     <Link
-      className="px-1 py-1 text-orange-800 hover:bg-orange-300"
+      className="px-1 py-1 text-purple-800 hover:bg-purple-300"
       href={href}
       prefetch={prefetch}
     >

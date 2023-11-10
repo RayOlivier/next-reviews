@@ -3,7 +3,7 @@ import NavLink from './NavLink';
 
 export default function NavBar() {
   return (
-    <nav className="bg-orange-200 px-2 py-2">
+    <nav className="bg-purple-200 px-2 py-2">
       <ul className="flex gap-2">
         <li className="font-bold font-orbitron ">
           <NavLink href="/">Indie Gamer</NavLink>

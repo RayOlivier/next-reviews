@@ -56,7 +56,7 @@ export default function SearchBox() {
               {({ active }) => (
                 <span
                   className={`block px-2 truncate w-full cursor-pointer ${
-                    active ? 'bg-orange-100' : ''
+                    active ? 'bg-purple-100' : ''
                   }`}
                 >
                   {review.title}
