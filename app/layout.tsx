@@ -32,7 +32,15 @@ export default function RootLayout({ children }: LayoutProps) {
           >
             RAWG
           </a>
-          . Made by Ray Olivier.
+          . Made by{' '}
+          <a
+            href="https://github.com/RayOlivier"
+            target="_blank"
+            className="text-purple-800 hover:underline"
+          >
+            Ray Olivier
+          </a>
+          .
         </footer>
       </body>
     </html>

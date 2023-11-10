@@ -10,8 +10,28 @@ export default function AboutPage() {
     <>
       <Heading>About</Heading>
       <p>
-        A simple project from the Udemy course &quotNext.js by Example&quot,
-        taught by Mirko Nasato.
+        A simple portfolio project built using React, Next.js, TailwindCSS, and
+        Strapi CMS.
+      </p>
+      <br />
+      <p>
+        Built by{' '}
+        <a
+          href="https://github.com/RayOlivier"
+          target="_blank"
+          className="text-purple-800 hover:underline"
+        >
+          Ray Olivier
+        </a>
+        . Checkout the{' '}
+        <a
+          href="https://github.com/RayOlivier/next-reviews"
+          target="_blank"
+          className="text-purple-800 hover:underline"
+        >
+          Github Repo
+        </a>
+        .
       </p>
     </>
   );
